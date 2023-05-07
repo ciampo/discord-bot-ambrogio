@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "start": "node index.mjs"
+    "start": "node index.mjs",
+    "deploy": "gcloud run deploy --source ."
   },
   "author": "",
   "license": "ISC",

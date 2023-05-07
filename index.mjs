@@ -46,12 +46,21 @@ const client = new Client({ rest, gateway });
 client.on(GatewayDispatchEvents.InteractionCreate, async ({ data: interaction, api }) => {
 	for (const command of COMMANDS) {
 
+
 		if (
 			interaction.type === InteractionType.ApplicationCommand &&
 			interaction.data.name === command.name
 		) {
 			console.log('Replying to command', command.name);
-			await command.reply({ data: interaction, api });
+
+			await api.interactions.reply(
+				interaction.id,
+				interaction.token,
+				{
+					content: command.getReply({data: interaction, api}) || '[no reply]',
+					// flags: MessageFlags.Ephemeral
+				}
+			)
 		}
 	}
 });

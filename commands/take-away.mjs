@@ -44,7 +44,7 @@ const command = new SlashCommandBuilder()
 // Get the raw data that can be sent to Discord
 const rawData = command.toJSON();
 
-async function reply({ data: interaction, api }) {
+function getReply({ data: interaction, api }) {
   if (interaction.type !== InteractionType.ApplicationCommand || interaction.data.name !== name) {
 		return;
 	}
@@ -57,18 +57,11 @@ async function reply({ data: interaction, api }) {
 		weighedFoodOptions[foodOptionIndex].toUpperCase()
 	);
 
-	await api.interactions.reply(
-		interaction.id,
-		interaction.token,
-		{
-			content: sentence,
-			flags: MessageFlags.Ephemeral
-		}
-	);
+	return sentence;
 }
 
 export {
   name,
   rawData,
-  reply
+  getReply
 }
