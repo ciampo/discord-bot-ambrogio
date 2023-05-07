@@ -1,8 +1,3 @@
-import {
-	InteractionType,
-	MessageFlags,
-} from '@discordjs/core';
-
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 const name = 'menu';
@@ -45,11 +40,7 @@ const command = new SlashCommandBuilder()
 const rawData = command.toJSON();
 
 function getReply({ data: interaction, api }) {
-  if (interaction.type !== InteractionType.ApplicationCommand || interaction.data.name !== name) {
-		return;
-	}
-
-	const foodOptionIndex = generateRandomInt(0, weighedFoodOptions.length);
+  const foodOptionIndex = generateRandomInt(0, weighedFoodOptions.length);
 	const prefixOptionIndex = generateRandomInt(0, prefixes.length);
 
 	const sentence = prefixes[prefixOptionIndex].replace(

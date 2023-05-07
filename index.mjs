@@ -45,8 +45,6 @@ const client = new Client({ rest, gateway });
 // Each event contains an `api` prop along with the event data that allows you to interface with the Discord REST API
 client.on(GatewayDispatchEvents.InteractionCreate, async ({ data: interaction, api }) => {
 	for (const command of COMMANDS) {
-
-
 		if (
 			interaction.type === InteractionType.ApplicationCommand &&
 			interaction.data.name === command.name
@@ -62,6 +60,8 @@ client.on(GatewayDispatchEvents.InteractionCreate, async ({ data: interaction, a
 						// flags: MessageFlags.Ephemeral
 					}
 				)
+
+				break;
 			} catch(error) {
 				console.error(error);
 			}

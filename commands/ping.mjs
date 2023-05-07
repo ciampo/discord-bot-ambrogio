@@ -1,8 +1,3 @@
-import {
-	InteractionType,
-	MessageFlags,
-} from '@discordjs/core';
-
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 const name = 'ping';
@@ -15,11 +10,7 @@ const command = new SlashCommandBuilder()
 const rawData = command.toJSON();
 
 function getReply({ data: interaction, api }) {
-  if (interaction.type !== InteractionType.ApplicationCommand || interaction.data.name !== name) {
-		return;
-	}
-
-	return 'Pong';
+  return 'Pong';
 }
 
 export {
