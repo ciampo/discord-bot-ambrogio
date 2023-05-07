@@ -50,6 +50,7 @@ client.on(GatewayDispatchEvents.InteractionCreate, async ({ data: interaction, a
 			interaction.type === InteractionType.ApplicationCommand &&
 			interaction.data.name === command.name
 		) {
+			console.log('Replying to command', command.name);
 			await command.reply({ data: interaction, api });
 		}
 	}
@@ -61,6 +62,7 @@ client.once(GatewayDispatchEvents.Ready, async () => {
 	console.log('Ready and connected as', currentUser.username);
 
 	for (const command of COMMANDS) {
+		console.log('Registering command', command.name);
 		await client.api.applicationCommands.createGlobalCommand(
 			DISCORD_APP_ID,
 			command.rawData,
