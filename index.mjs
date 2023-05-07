@@ -10,10 +10,12 @@ import {
 } from '@discordjs/core';
 
 import * as pingCommand from './commands/ping.mjs';
+import * as takeAwayCommand from './commands/take-away.mjs';
 
 const APP_ID = '1104743015572066344';
 const COMMANDS = [
-	pingCommand
+	pingCommand,
+	takeAwayCommand
 ];
 
 // Create REST and WebSocket managers directly
