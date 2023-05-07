@@ -53,14 +53,18 @@ client.on(GatewayDispatchEvents.InteractionCreate, async ({ data: interaction, a
 		) {
 			console.log('Replying to command', command.name);
 
-			await api.interactions.reply(
-				interaction.id,
-				interaction.token,
-				{
-					content: command.getReply({data: interaction, api}) || '[no reply]',
-					// flags: MessageFlags.Ephemeral
-				}
-			)
+			try {
+				await api.interactions.reply(
+					interaction.id,
+					interaction.token,
+					{
+						content: command.getReply({data: interaction, api}) || '[no reply]',
+						// flags: MessageFlags.Ephemeral
+					}
+				)
+			} catch(error) {
+				console.error(error);
+			}
 		}
 	}
 });
@@ -70,12 +74,17 @@ client.once(GatewayDispatchEvents.Ready, async () => {
 	const currentUser = await client.api.users.getCurrent();
 	console.log('Ready and connected as', currentUser.username);
 
-	for (const command of COMMANDS) {
-		console.log('Registering command', command.name);
-		await client.api.applicationCommands.createGlobalCommand(
-			DISCORD_APP_ID,
-			command.rawData,
-		);
+	try {
+		for (const command of COMMANDS) {
+			console.log('Registering command', command.name);
+
+			await client.api.applicationCommands.createGlobalCommand(
+				DISCORD_APP_ID,
+				command.rawData,
+			);
+		}
+	} catch(error) {
+		console.error(error);
 	}
 });
 
