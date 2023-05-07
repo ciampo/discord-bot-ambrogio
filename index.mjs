@@ -9,10 +9,21 @@ import {
 	Client
 } from '@discordjs/core';
 
+import express from 'express';
+
 import * as pingCommand from './commands/ping.mjs';
 import * as takeAwayCommand from './commands/take-away.mjs';
 
-const APP_ID = '1104743015572066344';
+const port = process.env.PORT || 8080;
+const expressServer = express();
+expressServer.get('/', function(req, res){
+	res.send("Hello world!");
+});
+expressServer.listen(port, () => {
+  console.log('Listening on port', port);
+});
+
+const DISCORD_APP_ID = '1104743015572066344';
 const COMMANDS = [
 	pingCommand,
 	takeAwayCommand
@@ -41,11 +52,6 @@ client.on(GatewayDispatchEvents.InteractionCreate, async ({ data: interaction, a
 		) {
 			await command.reply({ data: interaction, api });
 		}
-
-		// await client.api.applicationCommands.createGlobalCommand(
-		// 	APP_ID,
-		// 	command.rawData,
-		// );
 	}
 });
 
@@ -56,7 +62,7 @@ client.once(GatewayDispatchEvents.Ready, async () => {
 
 	for (const command of COMMANDS) {
 		await client.api.applicationCommands.createGlobalCommand(
-			APP_ID,
+			DISCORD_APP_ID,
 			command.rawData,
 		);
 	}
