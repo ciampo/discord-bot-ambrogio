@@ -1,15 +1,17 @@
 {
-  "name": "discord-bot-take-away",
+  "name": "discord-bot-ambrogio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.mjs"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/core": "^0.6.0"
+    "@discordjs/builders": "^1.6.3",
+    "@discordjs/core": "^0.6.0",
+    "dotenv": "^16.0.3"
   },
   "volta": {
     "node": "18.16.0"
